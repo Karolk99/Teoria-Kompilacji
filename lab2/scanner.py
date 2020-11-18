@@ -28,7 +28,7 @@ t_M_SUB = r'\.-'
 t_M_MUL = r'\.\*'
 t_M_DIV = r'\./'
 
-t_TRANSPOSE = r'\''
+t_M_TRANSPOSE = r'\''
 
 
 def t_ID(t):
