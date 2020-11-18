@@ -1,0 +1,4050 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> instructions
+Rule 2     instructions -> instructions instruction
+Rule 3     instructions -> <empty>
+Rule 4     instruction -> ;
+Rule 5     expression -> INT
+Rule 6     expression -> FLOAT
+Rule 7     expression -> matrix
+Rule 8     expression -> STRING
+Rule 9     expression -> ID
+Rule 10    expression -> ( expression )
+Rule 11    instruction -> { instructions }
+Rule 12    expression -> expression + expression
+Rule 13    expression -> expression - expression
+Rule 14    expression -> expression * expression
+Rule 15    expression -> expression / expression
+Rule 16    expression -> expression M_ADD expression
+Rule 17    expression -> expression M_SUB expression
+Rule 18    expression -> expression M_MUL expression
+Rule 19    expression -> expression M_DIV expression
+Rule 20    condition -> expression < expression
+Rule 21    condition -> expression > expression
+Rule 22    condition -> expression LE expression
+Rule 23    condition -> expression GE expression
+Rule 24    condition -> expression NEQ expression
+Rule 25    condition -> expression EQ expression
+Rule 26    expression -> - expression
+Rule 27    matrix -> expression M_TRANSPOSE
+Rule 28    matrix -> ZEROS ( expression )
+Rule 29    matrix -> ONES ( expression )
+Rule 30    matrix -> EYE ( expression )
+Rule 31    instruction -> ID = expression ;
+Rule 32    instruction -> ID A_ADD expression ;
+Rule 33    instruction -> ID A_SUB expression ;
+Rule 34    instruction -> ID A_MUL expression ;
+Rule 35    instruction -> ID A_DIV expression ;
+Rule 36    instruction -> ID array = expression ;
+Rule 37    instruction -> ID array A_ADD expression ;
+Rule 38    instruction -> ID array A_SUB expression ;
+Rule 39    instruction -> ID array A_MUL expression ;
+Rule 40    instruction -> ID array A_DIV expression ;
+Rule 41    instruction -> IF ( condition ) instruction
+Rule 42    instruction -> IF ( condition ) instruction ELSE instruction
+Rule 43    instruction -> WHILE ( condition ) instruction
+Rule 44    instruction -> FOR ID = expression : expression instruction
+Rule 45    instruction -> BREAK ;
+Rule 46    instruction -> CONTINUE ;
+Rule 47    instruction -> RETURN expression ;
+Rule 48    instruction -> PRINT list ;
+Rule 49    matrix -> [ arraylist ]
+Rule 50    arraylist -> array
+Rule 51    arraylist -> arraylist , array
+Rule 52    array -> [ list ]
+Rule 53    list -> expression
+Rule 54    list -> list , expression
+Rule 55    expression -> ID array
+
+Terminals, with rules where they appear
+
+(                    : 10 28 29 30 41 42 43
+)                    : 10 28 29 30 41 42 43
+*                    : 14
++                    : 12
+,                    : 51 54
+-                    : 13 26
+/                    : 15
+:                    : 44
+;                    : 4 31 32 33 34 35 36 37 38 39 40 45 46 47 48
+<                    : 20
+=                    : 31 36 44
+>                    : 21
+A_ADD                : 32 37
+A_DIV                : 35 40
+A_MUL                : 34 39
+A_SUB                : 33 38
+BREAK                : 45
+CONTINUE             : 46
+ELSE                 : 42
+EQ                   : 25
+EYE                  : 30
+FLOAT                : 6
+FOR                  : 44
+GE                   : 23
+ID                   : 9 31 32 33 34 35 36 37 38 39 40 44 55
+IF                   : 41 42
+INT                  : 5
+LE                   : 22
+M_ADD                : 16
+M_DIV                : 19
+M_MUL                : 18
+M_SUB                : 17
+M_TRANSPOSE          : 27
+NEQ                  : 24
+ONES                 : 29
+PRINT                : 48
+RETURN               : 47
+STRING               : 8
+WHILE                : 43
+ZEROS                : 28
+[                    : 49 52
+]                    : 49 52
+error                : 
+{                    : 11
+}                    : 11
+
+Nonterminals, with rules where they appear
+
+array                : 36 37 38 39 40 50 51 55
+arraylist            : 49 51
+condition            : 41 42 43
+expression           : 10 12 12 13 13 14 14 15 15 16 16 17 17 18 18 19 19 20 20 21 21 22 22 23 23 24 24 25 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 44 44 47 53 54
+instruction          : 2 41 42 42 43 44
+instructions         : 1 2 11
+list                 : 48 52 54
+matrix               : 7
+program              : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . instructions
+    (2) instructions -> . instructions instruction
+    (3) instructions -> .
+
+    ;               reduce using rule 3 (instructions -> .)
+    {               reduce using rule 3 (instructions -> .)
+    ID              reduce using rule 3 (instructions -> .)
+    IF              reduce using rule 3 (instructions -> .)
+    WHILE           reduce using rule 3 (instructions -> .)
+    FOR             reduce using rule 3 (instructions -> .)
+    BREAK           reduce using rule 3 (instructions -> .)
+    CONTINUE        reduce using rule 3 (instructions -> .)
+    RETURN          reduce using rule 3 (instructions -> .)
+    PRINT           reduce using rule 3 (instructions -> .)
+    $end            reduce using rule 3 (instructions -> .)
+
+    program                        shift and go to state 1
+    instructions                   shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> instructions .
+    (2) instructions -> instructions . instruction
+    (4) instruction -> . ;
+    (11) instruction -> . { instructions }
+    (31) instruction -> . ID = expression ;
+    (32) instruction -> . ID A_ADD expression ;
+    (33) instruction -> . ID A_SUB expression ;
+    (34) instruction -> . ID A_MUL expression ;
+    (35) instruction -> . ID A_DIV expression ;
+    (36) instruction -> . ID array = expression ;
+    (37) instruction -> . ID array A_ADD expression ;
+    (38) instruction -> . ID array A_SUB expression ;
+    (39) instruction -> . ID array A_MUL expression ;
+    (40) instruction -> . ID array A_DIV expression ;
+    (41) instruction -> . IF ( condition ) instruction
+    (42) instruction -> . IF ( condition ) instruction ELSE instruction
+    (43) instruction -> . WHILE ( condition ) instruction
+    (44) instruction -> . FOR ID = expression : expression instruction
+    (45) instruction -> . BREAK ;
+    (46) instruction -> . CONTINUE ;
+    (47) instruction -> . RETURN expression ;
+    (48) instruction -> . PRINT list ;
+
+    $end            reduce using rule 1 (program -> instructions .)
+    ;               shift and go to state 4
+    {               shift and go to state 5
+    ID              shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    BREAK           shift and go to state 10
+    CONTINUE        shift and go to state 11
+    RETURN          shift and go to state 12
+    PRINT           shift and go to state 13
+
+    instruction                    shift and go to state 3
+
+state 3
+
+    (2) instructions -> instructions instruction .
+
+    ;               reduce using rule 2 (instructions -> instructions instruction .)
+    {               reduce using rule 2 (instructions -> instructions instruction .)
+    ID              reduce using rule 2 (instructions -> instructions instruction .)
+    IF              reduce using rule 2 (instructions -> instructions instruction .)
+    WHILE           reduce using rule 2 (instructions -> instructions instruction .)
+    FOR             reduce using rule 2 (instructions -> instructions instruction .)
+    BREAK           reduce using rule 2 (instructions -> instructions instruction .)
+    CONTINUE        reduce using rule 2 (instructions -> instructions instruction .)
+    RETURN          reduce using rule 2 (instructions -> instructions instruction .)
+    PRINT           reduce using rule 2 (instructions -> instructions instruction .)
+    $end            reduce using rule 2 (instructions -> instructions instruction .)
+    }               reduce using rule 2 (instructions -> instructions instruction .)
+
+
+state 4
+
+    (4) instruction -> ; .
+
+    ;               reduce using rule 4 (instruction -> ; .)
+    {               reduce using rule 4 (instruction -> ; .)
+    ID              reduce using rule 4 (instruction -> ; .)
+    IF              reduce using rule 4 (instruction -> ; .)
+    WHILE           reduce using rule 4 (instruction -> ; .)
+    FOR             reduce using rule 4 (instruction -> ; .)
+    BREAK           reduce using rule 4 (instruction -> ; .)
+    CONTINUE        reduce using rule 4 (instruction -> ; .)
+    RETURN          reduce using rule 4 (instruction -> ; .)
+    PRINT           reduce using rule 4 (instruction -> ; .)
+    $end            reduce using rule 4 (instruction -> ; .)
+    }               reduce using rule 4 (instruction -> ; .)
+    ELSE            reduce using rule 4 (instruction -> ; .)
+
+
+state 5
+
+    (11) instruction -> { . instructions }
+    (2) instructions -> . instructions instruction
+    (3) instructions -> .
+
+    }               reduce using rule 3 (instructions -> .)
+    ;               reduce using rule 3 (instructions -> .)
+    {               reduce using rule 3 (instructions -> .)
+    ID              reduce using rule 3 (instructions -> .)
+    IF              reduce using rule 3 (instructions -> .)
+    WHILE           reduce using rule 3 (instructions -> .)
+    FOR             reduce using rule 3 (instructions -> .)
+    BREAK           reduce using rule 3 (instructions -> .)
+    CONTINUE        reduce using rule 3 (instructions -> .)
+    RETURN          reduce using rule 3 (instructions -> .)
+    PRINT           reduce using rule 3 (instructions -> .)
+
+    instructions                   shift and go to state 14
+
+state 6
+
+    (31) instruction -> ID . = expression ;
+    (32) instruction -> ID . A_ADD expression ;
+    (33) instruction -> ID . A_SUB expression ;
+    (34) instruction -> ID . A_MUL expression ;
+    (35) instruction -> ID . A_DIV expression ;
+    (36) instruction -> ID . array = expression ;
+    (37) instruction -> ID . array A_ADD expression ;
+    (38) instruction -> ID . array A_SUB expression ;
+    (39) instruction -> ID . array A_MUL expression ;
+    (40) instruction -> ID . array A_DIV expression ;
+    (52) array -> . [ list ]
+
+    =               shift and go to state 15
+    A_ADD           shift and go to state 16
+    A_SUB           shift and go to state 17
+    A_MUL           shift and go to state 18
+    A_DIV           shift and go to state 19
+    [               shift and go to state 21
+
+    array                          shift and go to state 20
+
+state 7
+
+    (41) instruction -> IF . ( condition ) instruction
+    (42) instruction -> IF . ( condition ) instruction ELSE instruction
+
+    (               shift and go to state 22
+
+
+state 8
+
+    (43) instruction -> WHILE . ( condition ) instruction
+
+    (               shift and go to state 23
+
+
+state 9
+
+    (44) instruction -> FOR . ID = expression : expression instruction
+
+    ID              shift and go to state 24
+
+
+state 10
+
+    (45) instruction -> BREAK . ;
+
+    ;               shift and go to state 25
+
+
+state 11
+
+    (46) instruction -> CONTINUE . ;
+
+    ;               shift and go to state 26
+
+
+state 12
+
+    (47) instruction -> RETURN . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 27
+    matrix                         shift and go to state 30
+
+state 13
+
+    (48) instruction -> PRINT . list ;
+    (53) list -> . expression
+    (54) list -> . list , expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    list                           shift and go to state 39
+    expression                     shift and go to state 40
+    matrix                         shift and go to state 30
+
+state 14
+
+    (11) instruction -> { instructions . }
+    (2) instructions -> instructions . instruction
+    (4) instruction -> . ;
+    (11) instruction -> . { instructions }
+    (31) instruction -> . ID = expression ;
+    (32) instruction -> . ID A_ADD expression ;
+    (33) instruction -> . ID A_SUB expression ;
+    (34) instruction -> . ID A_MUL expression ;
+    (35) instruction -> . ID A_DIV expression ;
+    (36) instruction -> . ID array = expression ;
+    (37) instruction -> . ID array A_ADD expression ;
+    (38) instruction -> . ID array A_SUB expression ;
+    (39) instruction -> . ID array A_MUL expression ;
+    (40) instruction -> . ID array A_DIV expression ;
+    (41) instruction -> . IF ( condition ) instruction
+    (42) instruction -> . IF ( condition ) instruction ELSE instruction
+    (43) instruction -> . WHILE ( condition ) instruction
+    (44) instruction -> . FOR ID = expression : expression instruction
+    (45) instruction -> . BREAK ;
+    (46) instruction -> . CONTINUE ;
+    (47) instruction -> . RETURN expression ;
+    (48) instruction -> . PRINT list ;
+
+    }               shift and go to state 41
+    ;               shift and go to state 4
+    {               shift and go to state 5
+    ID              shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    BREAK           shift and go to state 10
+    CONTINUE        shift and go to state 11
+    RETURN          shift and go to state 12
+    PRINT           shift and go to state 13
+
+    instruction                    shift and go to state 3
+
+state 15
+
+    (31) instruction -> ID = . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 42
+    matrix                         shift and go to state 30
+
+state 16
+
+    (32) instruction -> ID A_ADD . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 43
+    matrix                         shift and go to state 30
+
+state 17
+
+    (33) instruction -> ID A_SUB . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 44
+    matrix                         shift and go to state 30
+
+state 18
+
+    (34) instruction -> ID A_MUL . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 45
+    matrix                         shift and go to state 30
+
+state 19
+
+    (35) instruction -> ID A_DIV . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 46
+    matrix                         shift and go to state 30
+
+state 20
+
+    (36) instruction -> ID array . = expression ;
+    (37) instruction -> ID array . A_ADD expression ;
+    (38) instruction -> ID array . A_SUB expression ;
+    (39) instruction -> ID array . A_MUL expression ;
+    (40) instruction -> ID array . A_DIV expression ;
+
+    =               shift and go to state 47
+    A_ADD           shift and go to state 48
+    A_SUB           shift and go to state 49
+    A_MUL           shift and go to state 50
+    A_DIV           shift and go to state 51
+
+
+state 21
+
+    (52) array -> [ . list ]
+    (53) list -> . expression
+    (54) list -> . list , expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    list                           shift and go to state 52
+    expression                     shift and go to state 40
+    matrix                         shift and go to state 30
+
+state 22
+
+    (41) instruction -> IF ( . condition ) instruction
+    (42) instruction -> IF ( . condition ) instruction ELSE instruction
+    (20) condition -> . expression < expression
+    (21) condition -> . expression > expression
+    (22) condition -> . expression LE expression
+    (23) condition -> . expression GE expression
+    (24) condition -> . expression NEQ expression
+    (25) condition -> . expression EQ expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    condition                      shift and go to state 53
+    expression                     shift and go to state 54
+    matrix                         shift and go to state 30
+
+state 23
+
+    (43) instruction -> WHILE ( . condition ) instruction
+    (20) condition -> . expression < expression
+    (21) condition -> . expression > expression
+    (22) condition -> . expression LE expression
+    (23) condition -> . expression GE expression
+    (24) condition -> . expression NEQ expression
+    (25) condition -> . expression EQ expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    condition                      shift and go to state 55
+    expression                     shift and go to state 54
+    matrix                         shift and go to state 30
+
+state 24
+
+    (44) instruction -> FOR ID . = expression : expression instruction
+
+    =               shift and go to state 56
+
+
+state 25
+
+    (45) instruction -> BREAK ; .
+
+    ;               reduce using rule 45 (instruction -> BREAK ; .)
+    {               reduce using rule 45 (instruction -> BREAK ; .)
+    ID              reduce using rule 45 (instruction -> BREAK ; .)
+    IF              reduce using rule 45 (instruction -> BREAK ; .)
+    WHILE           reduce using rule 45 (instruction -> BREAK ; .)
+    FOR             reduce using rule 45 (instruction -> BREAK ; .)
+    BREAK           reduce using rule 45 (instruction -> BREAK ; .)
+    CONTINUE        reduce using rule 45 (instruction -> BREAK ; .)
+    RETURN          reduce using rule 45 (instruction -> BREAK ; .)
+    PRINT           reduce using rule 45 (instruction -> BREAK ; .)
+    $end            reduce using rule 45 (instruction -> BREAK ; .)
+    }               reduce using rule 45 (instruction -> BREAK ; .)
+    ELSE            reduce using rule 45 (instruction -> BREAK ; .)
+
+
+state 26
+
+    (46) instruction -> CONTINUE ; .
+
+    ;               reduce using rule 46 (instruction -> CONTINUE ; .)
+    {               reduce using rule 46 (instruction -> CONTINUE ; .)
+    ID              reduce using rule 46 (instruction -> CONTINUE ; .)
+    IF              reduce using rule 46 (instruction -> CONTINUE ; .)
+    WHILE           reduce using rule 46 (instruction -> CONTINUE ; .)
+    FOR             reduce using rule 46 (instruction -> CONTINUE ; .)
+    BREAK           reduce using rule 46 (instruction -> CONTINUE ; .)
+    CONTINUE        reduce using rule 46 (instruction -> CONTINUE ; .)
+    RETURN          reduce using rule 46 (instruction -> CONTINUE ; .)
+    PRINT           reduce using rule 46 (instruction -> CONTINUE ; .)
+    $end            reduce using rule 46 (instruction -> CONTINUE ; .)
+    }               reduce using rule 46 (instruction -> CONTINUE ; .)
+    ELSE            reduce using rule 46 (instruction -> CONTINUE ; .)
+
+
+state 27
+
+    (47) instruction -> RETURN expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 57
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 28
+
+    (5) expression -> INT .
+
+    ;               reduce using rule 5 (expression -> INT .)
+    +               reduce using rule 5 (expression -> INT .)
+    -               reduce using rule 5 (expression -> INT .)
+    *               reduce using rule 5 (expression -> INT .)
+    /               reduce using rule 5 (expression -> INT .)
+    M_ADD           reduce using rule 5 (expression -> INT .)
+    M_SUB           reduce using rule 5 (expression -> INT .)
+    M_MUL           reduce using rule 5 (expression -> INT .)
+    M_DIV           reduce using rule 5 (expression -> INT .)
+    M_TRANSPOSE     reduce using rule 5 (expression -> INT .)
+    ,               reduce using rule 5 (expression -> INT .)
+    ]               reduce using rule 5 (expression -> INT .)
+    <               reduce using rule 5 (expression -> INT .)
+    >               reduce using rule 5 (expression -> INT .)
+    LE              reduce using rule 5 (expression -> INT .)
+    GE              reduce using rule 5 (expression -> INT .)
+    NEQ             reduce using rule 5 (expression -> INT .)
+    EQ              reduce using rule 5 (expression -> INT .)
+    )               reduce using rule 5 (expression -> INT .)
+    :               reduce using rule 5 (expression -> INT .)
+    {               reduce using rule 5 (expression -> INT .)
+    ID              reduce using rule 5 (expression -> INT .)
+    IF              reduce using rule 5 (expression -> INT .)
+    WHILE           reduce using rule 5 (expression -> INT .)
+    FOR             reduce using rule 5 (expression -> INT .)
+    BREAK           reduce using rule 5 (expression -> INT .)
+    CONTINUE        reduce using rule 5 (expression -> INT .)
+    RETURN          reduce using rule 5 (expression -> INT .)
+    PRINT           reduce using rule 5 (expression -> INT .)
+
+
+state 29
+
+    (6) expression -> FLOAT .
+
+    ;               reduce using rule 6 (expression -> FLOAT .)
+    +               reduce using rule 6 (expression -> FLOAT .)
+    -               reduce using rule 6 (expression -> FLOAT .)
+    *               reduce using rule 6 (expression -> FLOAT .)
+    /               reduce using rule 6 (expression -> FLOAT .)
+    M_ADD           reduce using rule 6 (expression -> FLOAT .)
+    M_SUB           reduce using rule 6 (expression -> FLOAT .)
+    M_MUL           reduce using rule 6 (expression -> FLOAT .)
+    M_DIV           reduce using rule 6 (expression -> FLOAT .)
+    M_TRANSPOSE     reduce using rule 6 (expression -> FLOAT .)
+    ,               reduce using rule 6 (expression -> FLOAT .)
+    ]               reduce using rule 6 (expression -> FLOAT .)
+    <               reduce using rule 6 (expression -> FLOAT .)
+    >               reduce using rule 6 (expression -> FLOAT .)
+    LE              reduce using rule 6 (expression -> FLOAT .)
+    GE              reduce using rule 6 (expression -> FLOAT .)
+    NEQ             reduce using rule 6 (expression -> FLOAT .)
+    EQ              reduce using rule 6 (expression -> FLOAT .)
+    )               reduce using rule 6 (expression -> FLOAT .)
+    :               reduce using rule 6 (expression -> FLOAT .)
+    {               reduce using rule 6 (expression -> FLOAT .)
+    ID              reduce using rule 6 (expression -> FLOAT .)
+    IF              reduce using rule 6 (expression -> FLOAT .)
+    WHILE           reduce using rule 6 (expression -> FLOAT .)
+    FOR             reduce using rule 6 (expression -> FLOAT .)
+    BREAK           reduce using rule 6 (expression -> FLOAT .)
+    CONTINUE        reduce using rule 6 (expression -> FLOAT .)
+    RETURN          reduce using rule 6 (expression -> FLOAT .)
+    PRINT           reduce using rule 6 (expression -> FLOAT .)
+
+
+state 30
+
+    (7) expression -> matrix .
+
+    ;               reduce using rule 7 (expression -> matrix .)
+    +               reduce using rule 7 (expression -> matrix .)
+    -               reduce using rule 7 (expression -> matrix .)
+    *               reduce using rule 7 (expression -> matrix .)
+    /               reduce using rule 7 (expression -> matrix .)
+    M_ADD           reduce using rule 7 (expression -> matrix .)
+    M_SUB           reduce using rule 7 (expression -> matrix .)
+    M_MUL           reduce using rule 7 (expression -> matrix .)
+    M_DIV           reduce using rule 7 (expression -> matrix .)
+    M_TRANSPOSE     reduce using rule 7 (expression -> matrix .)
+    ,               reduce using rule 7 (expression -> matrix .)
+    ]               reduce using rule 7 (expression -> matrix .)
+    <               reduce using rule 7 (expression -> matrix .)
+    >               reduce using rule 7 (expression -> matrix .)
+    LE              reduce using rule 7 (expression -> matrix .)
+    GE              reduce using rule 7 (expression -> matrix .)
+    NEQ             reduce using rule 7 (expression -> matrix .)
+    EQ              reduce using rule 7 (expression -> matrix .)
+    )               reduce using rule 7 (expression -> matrix .)
+    :               reduce using rule 7 (expression -> matrix .)
+    {               reduce using rule 7 (expression -> matrix .)
+    ID              reduce using rule 7 (expression -> matrix .)
+    IF              reduce using rule 7 (expression -> matrix .)
+    WHILE           reduce using rule 7 (expression -> matrix .)
+    FOR             reduce using rule 7 (expression -> matrix .)
+    BREAK           reduce using rule 7 (expression -> matrix .)
+    CONTINUE        reduce using rule 7 (expression -> matrix .)
+    RETURN          reduce using rule 7 (expression -> matrix .)
+    PRINT           reduce using rule 7 (expression -> matrix .)
+
+
+state 31
+
+    (8) expression -> STRING .
+
+    ;               reduce using rule 8 (expression -> STRING .)
+    +               reduce using rule 8 (expression -> STRING .)
+    -               reduce using rule 8 (expression -> STRING .)
+    *               reduce using rule 8 (expression -> STRING .)
+    /               reduce using rule 8 (expression -> STRING .)
+    M_ADD           reduce using rule 8 (expression -> STRING .)
+    M_SUB           reduce using rule 8 (expression -> STRING .)
+    M_MUL           reduce using rule 8 (expression -> STRING .)
+    M_DIV           reduce using rule 8 (expression -> STRING .)
+    M_TRANSPOSE     reduce using rule 8 (expression -> STRING .)
+    ,               reduce using rule 8 (expression -> STRING .)
+    ]               reduce using rule 8 (expression -> STRING .)
+    <               reduce using rule 8 (expression -> STRING .)
+    >               reduce using rule 8 (expression -> STRING .)
+    LE              reduce using rule 8 (expression -> STRING .)
+    GE              reduce using rule 8 (expression -> STRING .)
+    NEQ             reduce using rule 8 (expression -> STRING .)
+    EQ              reduce using rule 8 (expression -> STRING .)
+    )               reduce using rule 8 (expression -> STRING .)
+    :               reduce using rule 8 (expression -> STRING .)
+    {               reduce using rule 8 (expression -> STRING .)
+    ID              reduce using rule 8 (expression -> STRING .)
+    IF              reduce using rule 8 (expression -> STRING .)
+    WHILE           reduce using rule 8 (expression -> STRING .)
+    FOR             reduce using rule 8 (expression -> STRING .)
+    BREAK           reduce using rule 8 (expression -> STRING .)
+    CONTINUE        reduce using rule 8 (expression -> STRING .)
+    RETURN          reduce using rule 8 (expression -> STRING .)
+    PRINT           reduce using rule 8 (expression -> STRING .)
+
+
+state 32
+
+    (9) expression -> ID .
+    (55) expression -> ID . array
+    (52) array -> . [ list ]
+
+    ;               reduce using rule 9 (expression -> ID .)
+    +               reduce using rule 9 (expression -> ID .)
+    -               reduce using rule 9 (expression -> ID .)
+    *               reduce using rule 9 (expression -> ID .)
+    /               reduce using rule 9 (expression -> ID .)
+    M_ADD           reduce using rule 9 (expression -> ID .)
+    M_SUB           reduce using rule 9 (expression -> ID .)
+    M_MUL           reduce using rule 9 (expression -> ID .)
+    M_DIV           reduce using rule 9 (expression -> ID .)
+    M_TRANSPOSE     reduce using rule 9 (expression -> ID .)
+    ,               reduce using rule 9 (expression -> ID .)
+    ]               reduce using rule 9 (expression -> ID .)
+    <               reduce using rule 9 (expression -> ID .)
+    >               reduce using rule 9 (expression -> ID .)
+    LE              reduce using rule 9 (expression -> ID .)
+    GE              reduce using rule 9 (expression -> ID .)
+    NEQ             reduce using rule 9 (expression -> ID .)
+    EQ              reduce using rule 9 (expression -> ID .)
+    )               reduce using rule 9 (expression -> ID .)
+    :               reduce using rule 9 (expression -> ID .)
+    {               reduce using rule 9 (expression -> ID .)
+    ID              reduce using rule 9 (expression -> ID .)
+    IF              reduce using rule 9 (expression -> ID .)
+    WHILE           reduce using rule 9 (expression -> ID .)
+    FOR             reduce using rule 9 (expression -> ID .)
+    BREAK           reduce using rule 9 (expression -> ID .)
+    CONTINUE        reduce using rule 9 (expression -> ID .)
+    RETURN          reduce using rule 9 (expression -> ID .)
+    PRINT           reduce using rule 9 (expression -> ID .)
+    [               shift and go to state 21
+
+    array                          shift and go to state 67
+
+state 33
+
+    (10) expression -> ( . expression )
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 68
+    matrix                         shift and go to state 30
+
+state 34
+
+    (26) expression -> - . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 69
+    matrix                         shift and go to state 30
+
+state 35
+
+    (28) matrix -> ZEROS . ( expression )
+
+    (               shift and go to state 70
+
+
+state 36
+
+    (29) matrix -> ONES . ( expression )
+
+    (               shift and go to state 71
+
+
+state 37
+
+    (30) matrix -> EYE . ( expression )
+
+    (               shift and go to state 72
+
+
+state 38
+
+    (49) matrix -> [ . arraylist ]
+    (50) arraylist -> . array
+    (51) arraylist -> . arraylist , array
+    (52) array -> . [ list ]
+
+    [               shift and go to state 21
+
+    arraylist                      shift and go to state 73
+    array                          shift and go to state 74
+
+state 39
+
+    (48) instruction -> PRINT list . ;
+    (54) list -> list . , expression
+
+    ;               shift and go to state 75
+    ,               shift and go to state 76
+
+
+state 40
+
+    (53) list -> expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 53 (list -> expression .)
+    ,               reduce using rule 53 (list -> expression .)
+    ]               reduce using rule 53 (list -> expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 41
+
+    (11) instruction -> { instructions } .
+
+    ;               reduce using rule 11 (instruction -> { instructions } .)
+    {               reduce using rule 11 (instruction -> { instructions } .)
+    ID              reduce using rule 11 (instruction -> { instructions } .)
+    IF              reduce using rule 11 (instruction -> { instructions } .)
+    WHILE           reduce using rule 11 (instruction -> { instructions } .)
+    FOR             reduce using rule 11 (instruction -> { instructions } .)
+    BREAK           reduce using rule 11 (instruction -> { instructions } .)
+    CONTINUE        reduce using rule 11 (instruction -> { instructions } .)
+    RETURN          reduce using rule 11 (instruction -> { instructions } .)
+    PRINT           reduce using rule 11 (instruction -> { instructions } .)
+    $end            reduce using rule 11 (instruction -> { instructions } .)
+    }               reduce using rule 11 (instruction -> { instructions } .)
+    ELSE            reduce using rule 11 (instruction -> { instructions } .)
+
+
+state 42
+
+    (31) instruction -> ID = expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 77
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 43
+
+    (32) instruction -> ID A_ADD expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 78
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 44
+
+    (33) instruction -> ID A_SUB expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 79
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 45
+
+    (34) instruction -> ID A_MUL expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 80
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 46
+
+    (35) instruction -> ID A_DIV expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 81
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 47
+
+    (36) instruction -> ID array = . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 82
+    matrix                         shift and go to state 30
+
+state 48
+
+    (37) instruction -> ID array A_ADD . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 83
+    matrix                         shift and go to state 30
+
+state 49
+
+    (38) instruction -> ID array A_SUB . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 84
+    matrix                         shift and go to state 30
+
+state 50
+
+    (39) instruction -> ID array A_MUL . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 85
+    matrix                         shift and go to state 30
+
+state 51
+
+    (40) instruction -> ID array A_DIV . expression ;
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 86
+    matrix                         shift and go to state 30
+
+state 52
+
+    (52) array -> [ list . ]
+    (54) list -> list . , expression
+
+    ]               shift and go to state 87
+    ,               shift and go to state 76
+
+
+state 53
+
+    (41) instruction -> IF ( condition . ) instruction
+    (42) instruction -> IF ( condition . ) instruction ELSE instruction
+
+    )               shift and go to state 88
+
+
+state 54
+
+    (20) condition -> expression . < expression
+    (21) condition -> expression . > expression
+    (22) condition -> expression . LE expression
+    (23) condition -> expression . GE expression
+    (24) condition -> expression . NEQ expression
+    (25) condition -> expression . EQ expression
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    <               shift and go to state 89
+    >               shift and go to state 90
+    LE              shift and go to state 91
+    GE              shift and go to state 92
+    NEQ             shift and go to state 93
+    EQ              shift and go to state 94
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 55
+
+    (43) instruction -> WHILE ( condition . ) instruction
+
+    )               shift and go to state 95
+
+
+state 56
+
+    (44) instruction -> FOR ID = . expression : expression instruction
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 96
+    matrix                         shift and go to state 30
+
+state 57
+
+    (47) instruction -> RETURN expression ; .
+
+    ;               reduce using rule 47 (instruction -> RETURN expression ; .)
+    {               reduce using rule 47 (instruction -> RETURN expression ; .)
+    ID              reduce using rule 47 (instruction -> RETURN expression ; .)
+    IF              reduce using rule 47 (instruction -> RETURN expression ; .)
+    WHILE           reduce using rule 47 (instruction -> RETURN expression ; .)
+    FOR             reduce using rule 47 (instruction -> RETURN expression ; .)
+    BREAK           reduce using rule 47 (instruction -> RETURN expression ; .)
+    CONTINUE        reduce using rule 47 (instruction -> RETURN expression ; .)
+    RETURN          reduce using rule 47 (instruction -> RETURN expression ; .)
+    PRINT           reduce using rule 47 (instruction -> RETURN expression ; .)
+    $end            reduce using rule 47 (instruction -> RETURN expression ; .)
+    }               reduce using rule 47 (instruction -> RETURN expression ; .)
+    ELSE            reduce using rule 47 (instruction -> RETURN expression ; .)
+
+
+state 58
+
+    (12) expression -> expression + . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 97
+    matrix                         shift and go to state 30
+
+state 59
+
+    (13) expression -> expression - . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 98
+    matrix                         shift and go to state 30
+
+state 60
+
+    (14) expression -> expression * . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 99
+    matrix                         shift and go to state 30
+
+state 61
+
+    (15) expression -> expression / . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 100
+    matrix                         shift and go to state 30
+
+state 62
+
+    (16) expression -> expression M_ADD . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 101
+    matrix                         shift and go to state 30
+
+state 63
+
+    (17) expression -> expression M_SUB . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 102
+    matrix                         shift and go to state 30
+
+state 64
+
+    (18) expression -> expression M_MUL . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 103
+    matrix                         shift and go to state 30
+
+state 65
+
+    (19) expression -> expression M_DIV . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 104
+    matrix                         shift and go to state 30
+
+state 66
+
+    (27) matrix -> expression M_TRANSPOSE .
+
+    ;               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    +               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    -               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    *               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    /               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    M_ADD           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    M_SUB           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    M_MUL           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    M_DIV           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    M_TRANSPOSE     reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    ,               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    ]               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    <               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    >               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    LE              reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    GE              reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    NEQ             reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    EQ              reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    )               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    :               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    {               reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    ID              reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    IF              reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    WHILE           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    FOR             reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    BREAK           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    CONTINUE        reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    RETURN          reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+    PRINT           reduce using rule 27 (matrix -> expression M_TRANSPOSE .)
+
+
+state 67
+
+    (55) expression -> ID array .
+
+    ;               reduce using rule 55 (expression -> ID array .)
+    +               reduce using rule 55 (expression -> ID array .)
+    -               reduce using rule 55 (expression -> ID array .)
+    *               reduce using rule 55 (expression -> ID array .)
+    /               reduce using rule 55 (expression -> ID array .)
+    M_ADD           reduce using rule 55 (expression -> ID array .)
+    M_SUB           reduce using rule 55 (expression -> ID array .)
+    M_MUL           reduce using rule 55 (expression -> ID array .)
+    M_DIV           reduce using rule 55 (expression -> ID array .)
+    M_TRANSPOSE     reduce using rule 55 (expression -> ID array .)
+    ,               reduce using rule 55 (expression -> ID array .)
+    ]               reduce using rule 55 (expression -> ID array .)
+    <               reduce using rule 55 (expression -> ID array .)
+    >               reduce using rule 55 (expression -> ID array .)
+    LE              reduce using rule 55 (expression -> ID array .)
+    GE              reduce using rule 55 (expression -> ID array .)
+    NEQ             reduce using rule 55 (expression -> ID array .)
+    EQ              reduce using rule 55 (expression -> ID array .)
+    )               reduce using rule 55 (expression -> ID array .)
+    :               reduce using rule 55 (expression -> ID array .)
+    {               reduce using rule 55 (expression -> ID array .)
+    ID              reduce using rule 55 (expression -> ID array .)
+    IF              reduce using rule 55 (expression -> ID array .)
+    WHILE           reduce using rule 55 (expression -> ID array .)
+    FOR             reduce using rule 55 (expression -> ID array .)
+    BREAK           reduce using rule 55 (expression -> ID array .)
+    CONTINUE        reduce using rule 55 (expression -> ID array .)
+    RETURN          reduce using rule 55 (expression -> ID array .)
+    PRINT           reduce using rule 55 (expression -> ID array .)
+
+
+state 68
+
+    (10) expression -> ( expression . )
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               shift and go to state 105
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 69
+
+    (26) expression -> - expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 26 (expression -> - expression .)
+    +               reduce using rule 26 (expression -> - expression .)
+    -               reduce using rule 26 (expression -> - expression .)
+    *               reduce using rule 26 (expression -> - expression .)
+    /               reduce using rule 26 (expression -> - expression .)
+    M_ADD           reduce using rule 26 (expression -> - expression .)
+    M_SUB           reduce using rule 26 (expression -> - expression .)
+    M_MUL           reduce using rule 26 (expression -> - expression .)
+    M_DIV           reduce using rule 26 (expression -> - expression .)
+    ,               reduce using rule 26 (expression -> - expression .)
+    ]               reduce using rule 26 (expression -> - expression .)
+    <               reduce using rule 26 (expression -> - expression .)
+    >               reduce using rule 26 (expression -> - expression .)
+    LE              reduce using rule 26 (expression -> - expression .)
+    GE              reduce using rule 26 (expression -> - expression .)
+    NEQ             reduce using rule 26 (expression -> - expression .)
+    EQ              reduce using rule 26 (expression -> - expression .)
+    )               reduce using rule 26 (expression -> - expression .)
+    :               reduce using rule 26 (expression -> - expression .)
+    {               reduce using rule 26 (expression -> - expression .)
+    ID              reduce using rule 26 (expression -> - expression .)
+    IF              reduce using rule 26 (expression -> - expression .)
+    WHILE           reduce using rule 26 (expression -> - expression .)
+    FOR             reduce using rule 26 (expression -> - expression .)
+    BREAK           reduce using rule 26 (expression -> - expression .)
+    CONTINUE        reduce using rule 26 (expression -> - expression .)
+    RETURN          reduce using rule 26 (expression -> - expression .)
+    PRINT           reduce using rule 26 (expression -> - expression .)
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_TRANSPOSE     [ reduce using rule 26 (expression -> - expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+  ! M_ADD           [ shift and go to state 62 ]
+  ! M_SUB           [ shift and go to state 63 ]
+  ! M_MUL           [ shift and go to state 64 ]
+  ! M_DIV           [ shift and go to state 65 ]
+
+
+state 70
+
+    (28) matrix -> ZEROS ( . expression )
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 106
+    matrix                         shift and go to state 30
+
+state 71
+
+    (29) matrix -> ONES ( . expression )
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 107
+    matrix                         shift and go to state 30
+
+state 72
+
+    (30) matrix -> EYE ( . expression )
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 108
+    matrix                         shift and go to state 30
+
+state 73
+
+    (49) matrix -> [ arraylist . ]
+    (51) arraylist -> arraylist . , array
+
+    ]               shift and go to state 109
+    ,               shift and go to state 110
+
+
+state 74
+
+    (50) arraylist -> array .
+
+    ]               reduce using rule 50 (arraylist -> array .)
+    ,               reduce using rule 50 (arraylist -> array .)
+
+
+state 75
+
+    (48) instruction -> PRINT list ; .
+
+    ;               reduce using rule 48 (instruction -> PRINT list ; .)
+    {               reduce using rule 48 (instruction -> PRINT list ; .)
+    ID              reduce using rule 48 (instruction -> PRINT list ; .)
+    IF              reduce using rule 48 (instruction -> PRINT list ; .)
+    WHILE           reduce using rule 48 (instruction -> PRINT list ; .)
+    FOR             reduce using rule 48 (instruction -> PRINT list ; .)
+    BREAK           reduce using rule 48 (instruction -> PRINT list ; .)
+    CONTINUE        reduce using rule 48 (instruction -> PRINT list ; .)
+    RETURN          reduce using rule 48 (instruction -> PRINT list ; .)
+    PRINT           reduce using rule 48 (instruction -> PRINT list ; .)
+    $end            reduce using rule 48 (instruction -> PRINT list ; .)
+    }               reduce using rule 48 (instruction -> PRINT list ; .)
+    ELSE            reduce using rule 48 (instruction -> PRINT list ; .)
+
+
+state 76
+
+    (54) list -> list , . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 111
+    matrix                         shift and go to state 30
+
+state 77
+
+    (31) instruction -> ID = expression ; .
+
+    ;               reduce using rule 31 (instruction -> ID = expression ; .)
+    {               reduce using rule 31 (instruction -> ID = expression ; .)
+    ID              reduce using rule 31 (instruction -> ID = expression ; .)
+    IF              reduce using rule 31 (instruction -> ID = expression ; .)
+    WHILE           reduce using rule 31 (instruction -> ID = expression ; .)
+    FOR             reduce using rule 31 (instruction -> ID = expression ; .)
+    BREAK           reduce using rule 31 (instruction -> ID = expression ; .)
+    CONTINUE        reduce using rule 31 (instruction -> ID = expression ; .)
+    RETURN          reduce using rule 31 (instruction -> ID = expression ; .)
+    PRINT           reduce using rule 31 (instruction -> ID = expression ; .)
+    $end            reduce using rule 31 (instruction -> ID = expression ; .)
+    }               reduce using rule 31 (instruction -> ID = expression ; .)
+    ELSE            reduce using rule 31 (instruction -> ID = expression ; .)
+
+
+state 78
+
+    (32) instruction -> ID A_ADD expression ; .
+
+    ;               reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    {               reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    ID              reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    IF              reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    WHILE           reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    FOR             reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    BREAK           reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    CONTINUE        reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    RETURN          reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    PRINT           reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    $end            reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    }               reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+    ELSE            reduce using rule 32 (instruction -> ID A_ADD expression ; .)
+
+
+state 79
+
+    (33) instruction -> ID A_SUB expression ; .
+
+    ;               reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    {               reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    ID              reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    IF              reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    WHILE           reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    FOR             reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    BREAK           reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    CONTINUE        reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    RETURN          reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    PRINT           reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    $end            reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    }               reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+    ELSE            reduce using rule 33 (instruction -> ID A_SUB expression ; .)
+
+
+state 80
+
+    (34) instruction -> ID A_MUL expression ; .
+
+    ;               reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    {               reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    ID              reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    IF              reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    WHILE           reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    FOR             reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    BREAK           reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    CONTINUE        reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    RETURN          reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    PRINT           reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    $end            reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    }               reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+    ELSE            reduce using rule 34 (instruction -> ID A_MUL expression ; .)
+
+
+state 81
+
+    (35) instruction -> ID A_DIV expression ; .
+
+    ;               reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    {               reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    ID              reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    IF              reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    WHILE           reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    FOR             reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    BREAK           reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    CONTINUE        reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    RETURN          reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    PRINT           reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    $end            reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    }               reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+    ELSE            reduce using rule 35 (instruction -> ID A_DIV expression ; .)
+
+
+state 82
+
+    (36) instruction -> ID array = expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 112
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 83
+
+    (37) instruction -> ID array A_ADD expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 113
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 84
+
+    (38) instruction -> ID array A_SUB expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 114
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 85
+
+    (39) instruction -> ID array A_MUL expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 115
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 86
+
+    (40) instruction -> ID array A_DIV expression . ;
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               shift and go to state 116
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 87
+
+    (52) array -> [ list ] .
+
+    =               reduce using rule 52 (array -> [ list ] .)
+    A_ADD           reduce using rule 52 (array -> [ list ] .)
+    A_SUB           reduce using rule 52 (array -> [ list ] .)
+    A_MUL           reduce using rule 52 (array -> [ list ] .)
+    A_DIV           reduce using rule 52 (array -> [ list ] .)
+    ;               reduce using rule 52 (array -> [ list ] .)
+    +               reduce using rule 52 (array -> [ list ] .)
+    -               reduce using rule 52 (array -> [ list ] .)
+    *               reduce using rule 52 (array -> [ list ] .)
+    /               reduce using rule 52 (array -> [ list ] .)
+    M_ADD           reduce using rule 52 (array -> [ list ] .)
+    M_SUB           reduce using rule 52 (array -> [ list ] .)
+    M_MUL           reduce using rule 52 (array -> [ list ] .)
+    M_DIV           reduce using rule 52 (array -> [ list ] .)
+    M_TRANSPOSE     reduce using rule 52 (array -> [ list ] .)
+    ,               reduce using rule 52 (array -> [ list ] .)
+    ]               reduce using rule 52 (array -> [ list ] .)
+    <               reduce using rule 52 (array -> [ list ] .)
+    >               reduce using rule 52 (array -> [ list ] .)
+    LE              reduce using rule 52 (array -> [ list ] .)
+    GE              reduce using rule 52 (array -> [ list ] .)
+    NEQ             reduce using rule 52 (array -> [ list ] .)
+    EQ              reduce using rule 52 (array -> [ list ] .)
+    )               reduce using rule 52 (array -> [ list ] .)
+    :               reduce using rule 52 (array -> [ list ] .)
+    {               reduce using rule 52 (array -> [ list ] .)
+    ID              reduce using rule 52 (array -> [ list ] .)
+    IF              reduce using rule 52 (array -> [ list ] .)
+    WHILE           reduce using rule 52 (array -> [ list ] .)
+    FOR             reduce using rule 52 (array -> [ list ] .)
+    BREAK           reduce using rule 52 (array -> [ list ] .)
+    CONTINUE        reduce using rule 52 (array -> [ list ] .)
+    RETURN          reduce using rule 52 (array -> [ list ] .)
+    PRINT           reduce using rule 52 (array -> [ list ] .)
+
+
+state 88
+
+    (41) instruction -> IF ( condition ) . instruction
+    (42) instruction -> IF ( condition ) . instruction ELSE instruction
+    (4) instruction -> . ;
+    (11) instruction -> . { instructions }
+    (31) instruction -> . ID = expression ;
+    (32) instruction -> . ID A_ADD expression ;
+    (33) instruction -> . ID A_SUB expression ;
+    (34) instruction -> . ID A_MUL expression ;
+    (35) instruction -> . ID A_DIV expression ;
+    (36) instruction -> . ID array = expression ;
+    (37) instruction -> . ID array A_ADD expression ;
+    (38) instruction -> . ID array A_SUB expression ;
+    (39) instruction -> . ID array A_MUL expression ;
+    (40) instruction -> . ID array A_DIV expression ;
+    (41) instruction -> . IF ( condition ) instruction
+    (42) instruction -> . IF ( condition ) instruction ELSE instruction
+    (43) instruction -> . WHILE ( condition ) instruction
+    (44) instruction -> . FOR ID = expression : expression instruction
+    (45) instruction -> . BREAK ;
+    (46) instruction -> . CONTINUE ;
+    (47) instruction -> . RETURN expression ;
+    (48) instruction -> . PRINT list ;
+
+    ;               shift and go to state 4
+    {               shift and go to state 5
+    ID              shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    BREAK           shift and go to state 10
+    CONTINUE        shift and go to state 11
+    RETURN          shift and go to state 12
+    PRINT           shift and go to state 13
+
+    instruction                    shift and go to state 117
+
+state 89
+
+    (20) condition -> expression < . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 118
+    matrix                         shift and go to state 30
+
+state 90
+
+    (21) condition -> expression > . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 119
+    matrix                         shift and go to state 30
+
+state 91
+
+    (22) condition -> expression LE . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 120
+    matrix                         shift and go to state 30
+
+state 92
+
+    (23) condition -> expression GE . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 121
+    matrix                         shift and go to state 30
+
+state 93
+
+    (24) condition -> expression NEQ . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 122
+    matrix                         shift and go to state 30
+
+state 94
+
+    (25) condition -> expression EQ . expression
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 123
+    matrix                         shift and go to state 30
+
+state 95
+
+    (43) instruction -> WHILE ( condition ) . instruction
+    (4) instruction -> . ;
+    (11) instruction -> . { instructions }
+    (31) instruction -> . ID = expression ;
+    (32) instruction -> . ID A_ADD expression ;
+    (33) instruction -> . ID A_SUB expression ;
+    (34) instruction -> . ID A_MUL expression ;
+    (35) instruction -> . ID A_DIV expression ;
+    (36) instruction -> . ID array = expression ;
+    (37) instruction -> . ID array A_ADD expression ;
+    (38) instruction -> . ID array A_SUB expression ;
+    (39) instruction -> . ID array A_MUL expression ;
+    (40) instruction -> . ID array A_DIV expression ;
+    (41) instruction -> . IF ( condition ) instruction
+    (42) instruction -> . IF ( condition ) instruction ELSE instruction
+    (43) instruction -> . WHILE ( condition ) instruction
+    (44) instruction -> . FOR ID = expression : expression instruction
+    (45) instruction -> . BREAK ;
+    (46) instruction -> . CONTINUE ;
+    (47) instruction -> . RETURN expression ;
+    (48) instruction -> . PRINT list ;
+
+    ;               shift and go to state 4
+    {               shift and go to state 5
+    ID              shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    BREAK           shift and go to state 10
+    CONTINUE        shift and go to state 11
+    RETURN          shift and go to state 12
+    PRINT           shift and go to state 13
+
+    instruction                    shift and go to state 124
+
+state 96
+
+    (44) instruction -> FOR ID = expression . : expression instruction
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    :               shift and go to state 125
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 97
+
+    (12) expression -> expression + expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 12 (expression -> expression + expression .)
+    +               reduce using rule 12 (expression -> expression + expression .)
+    -               reduce using rule 12 (expression -> expression + expression .)
+    ,               reduce using rule 12 (expression -> expression + expression .)
+    ]               reduce using rule 12 (expression -> expression + expression .)
+    <               reduce using rule 12 (expression -> expression + expression .)
+    >               reduce using rule 12 (expression -> expression + expression .)
+    LE              reduce using rule 12 (expression -> expression + expression .)
+    GE              reduce using rule 12 (expression -> expression + expression .)
+    NEQ             reduce using rule 12 (expression -> expression + expression .)
+    EQ              reduce using rule 12 (expression -> expression + expression .)
+    )               reduce using rule 12 (expression -> expression + expression .)
+    :               reduce using rule 12 (expression -> expression + expression .)
+    {               reduce using rule 12 (expression -> expression + expression .)
+    ID              reduce using rule 12 (expression -> expression + expression .)
+    IF              reduce using rule 12 (expression -> expression + expression .)
+    WHILE           reduce using rule 12 (expression -> expression + expression .)
+    FOR             reduce using rule 12 (expression -> expression + expression .)
+    BREAK           reduce using rule 12 (expression -> expression + expression .)
+    CONTINUE        reduce using rule 12 (expression -> expression + expression .)
+    RETURN          reduce using rule 12 (expression -> expression + expression .)
+    PRINT           reduce using rule 12 (expression -> expression + expression .)
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+  ! *               [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! /               [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! M_ADD           [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! M_SUB           [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! M_MUL           [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! M_DIV           [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! M_TRANSPOSE     [ reduce using rule 12 (expression -> expression + expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+
+
+state 98
+
+    (13) expression -> expression - expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 13 (expression -> expression - expression .)
+    +               reduce using rule 13 (expression -> expression - expression .)
+    -               reduce using rule 13 (expression -> expression - expression .)
+    ,               reduce using rule 13 (expression -> expression - expression .)
+    ]               reduce using rule 13 (expression -> expression - expression .)
+    <               reduce using rule 13 (expression -> expression - expression .)
+    >               reduce using rule 13 (expression -> expression - expression .)
+    LE              reduce using rule 13 (expression -> expression - expression .)
+    GE              reduce using rule 13 (expression -> expression - expression .)
+    NEQ             reduce using rule 13 (expression -> expression - expression .)
+    EQ              reduce using rule 13 (expression -> expression - expression .)
+    )               reduce using rule 13 (expression -> expression - expression .)
+    :               reduce using rule 13 (expression -> expression - expression .)
+    {               reduce using rule 13 (expression -> expression - expression .)
+    ID              reduce using rule 13 (expression -> expression - expression .)
+    IF              reduce using rule 13 (expression -> expression - expression .)
+    WHILE           reduce using rule 13 (expression -> expression - expression .)
+    FOR             reduce using rule 13 (expression -> expression - expression .)
+    BREAK           reduce using rule 13 (expression -> expression - expression .)
+    CONTINUE        reduce using rule 13 (expression -> expression - expression .)
+    RETURN          reduce using rule 13 (expression -> expression - expression .)
+    PRINT           reduce using rule 13 (expression -> expression - expression .)
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+  ! *               [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! /               [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! M_ADD           [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! M_SUB           [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! M_MUL           [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! M_DIV           [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! M_TRANSPOSE     [ reduce using rule 13 (expression -> expression - expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+
+
+state 99
+
+    (14) expression -> expression * expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 14 (expression -> expression * expression .)
+    +               reduce using rule 14 (expression -> expression * expression .)
+    -               reduce using rule 14 (expression -> expression * expression .)
+    *               reduce using rule 14 (expression -> expression * expression .)
+    /               reduce using rule 14 (expression -> expression * expression .)
+    ,               reduce using rule 14 (expression -> expression * expression .)
+    ]               reduce using rule 14 (expression -> expression * expression .)
+    <               reduce using rule 14 (expression -> expression * expression .)
+    >               reduce using rule 14 (expression -> expression * expression .)
+    LE              reduce using rule 14 (expression -> expression * expression .)
+    GE              reduce using rule 14 (expression -> expression * expression .)
+    NEQ             reduce using rule 14 (expression -> expression * expression .)
+    EQ              reduce using rule 14 (expression -> expression * expression .)
+    )               reduce using rule 14 (expression -> expression * expression .)
+    :               reduce using rule 14 (expression -> expression * expression .)
+    {               reduce using rule 14 (expression -> expression * expression .)
+    ID              reduce using rule 14 (expression -> expression * expression .)
+    IF              reduce using rule 14 (expression -> expression * expression .)
+    WHILE           reduce using rule 14 (expression -> expression * expression .)
+    FOR             reduce using rule 14 (expression -> expression * expression .)
+    BREAK           reduce using rule 14 (expression -> expression * expression .)
+    CONTINUE        reduce using rule 14 (expression -> expression * expression .)
+    RETURN          reduce using rule 14 (expression -> expression * expression .)
+    PRINT           reduce using rule 14 (expression -> expression * expression .)
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_ADD           [ reduce using rule 14 (expression -> expression * expression .) ]
+  ! M_SUB           [ reduce using rule 14 (expression -> expression * expression .) ]
+  ! M_MUL           [ reduce using rule 14 (expression -> expression * expression .) ]
+  ! M_DIV           [ reduce using rule 14 (expression -> expression * expression .) ]
+  ! M_TRANSPOSE     [ reduce using rule 14 (expression -> expression * expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+
+
+state 100
+
+    (15) expression -> expression / expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 15 (expression -> expression / expression .)
+    +               reduce using rule 15 (expression -> expression / expression .)
+    -               reduce using rule 15 (expression -> expression / expression .)
+    *               reduce using rule 15 (expression -> expression / expression .)
+    /               reduce using rule 15 (expression -> expression / expression .)
+    ,               reduce using rule 15 (expression -> expression / expression .)
+    ]               reduce using rule 15 (expression -> expression / expression .)
+    <               reduce using rule 15 (expression -> expression / expression .)
+    >               reduce using rule 15 (expression -> expression / expression .)
+    LE              reduce using rule 15 (expression -> expression / expression .)
+    GE              reduce using rule 15 (expression -> expression / expression .)
+    NEQ             reduce using rule 15 (expression -> expression / expression .)
+    EQ              reduce using rule 15 (expression -> expression / expression .)
+    )               reduce using rule 15 (expression -> expression / expression .)
+    :               reduce using rule 15 (expression -> expression / expression .)
+    {               reduce using rule 15 (expression -> expression / expression .)
+    ID              reduce using rule 15 (expression -> expression / expression .)
+    IF              reduce using rule 15 (expression -> expression / expression .)
+    WHILE           reduce using rule 15 (expression -> expression / expression .)
+    FOR             reduce using rule 15 (expression -> expression / expression .)
+    BREAK           reduce using rule 15 (expression -> expression / expression .)
+    CONTINUE        reduce using rule 15 (expression -> expression / expression .)
+    RETURN          reduce using rule 15 (expression -> expression / expression .)
+    PRINT           reduce using rule 15 (expression -> expression / expression .)
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_ADD           [ reduce using rule 15 (expression -> expression / expression .) ]
+  ! M_SUB           [ reduce using rule 15 (expression -> expression / expression .) ]
+  ! M_MUL           [ reduce using rule 15 (expression -> expression / expression .) ]
+  ! M_DIV           [ reduce using rule 15 (expression -> expression / expression .) ]
+  ! M_TRANSPOSE     [ reduce using rule 15 (expression -> expression / expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+
+
+state 101
+
+    (16) expression -> expression M_ADD expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 16 (expression -> expression M_ADD expression .)
+    +               reduce using rule 16 (expression -> expression M_ADD expression .)
+    -               reduce using rule 16 (expression -> expression M_ADD expression .)
+    *               reduce using rule 16 (expression -> expression M_ADD expression .)
+    /               reduce using rule 16 (expression -> expression M_ADD expression .)
+    M_ADD           reduce using rule 16 (expression -> expression M_ADD expression .)
+    M_SUB           reduce using rule 16 (expression -> expression M_ADD expression .)
+    ,               reduce using rule 16 (expression -> expression M_ADD expression .)
+    ]               reduce using rule 16 (expression -> expression M_ADD expression .)
+    <               reduce using rule 16 (expression -> expression M_ADD expression .)
+    >               reduce using rule 16 (expression -> expression M_ADD expression .)
+    LE              reduce using rule 16 (expression -> expression M_ADD expression .)
+    GE              reduce using rule 16 (expression -> expression M_ADD expression .)
+    NEQ             reduce using rule 16 (expression -> expression M_ADD expression .)
+    EQ              reduce using rule 16 (expression -> expression M_ADD expression .)
+    )               reduce using rule 16 (expression -> expression M_ADD expression .)
+    :               reduce using rule 16 (expression -> expression M_ADD expression .)
+    {               reduce using rule 16 (expression -> expression M_ADD expression .)
+    ID              reduce using rule 16 (expression -> expression M_ADD expression .)
+    IF              reduce using rule 16 (expression -> expression M_ADD expression .)
+    WHILE           reduce using rule 16 (expression -> expression M_ADD expression .)
+    FOR             reduce using rule 16 (expression -> expression M_ADD expression .)
+    BREAK           reduce using rule 16 (expression -> expression M_ADD expression .)
+    CONTINUE        reduce using rule 16 (expression -> expression M_ADD expression .)
+    RETURN          reduce using rule 16 (expression -> expression M_ADD expression .)
+    PRINT           reduce using rule 16 (expression -> expression M_ADD expression .)
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_MUL           [ reduce using rule 16 (expression -> expression M_ADD expression .) ]
+  ! M_DIV           [ reduce using rule 16 (expression -> expression M_ADD expression .) ]
+  ! M_TRANSPOSE     [ reduce using rule 16 (expression -> expression M_ADD expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+  ! M_ADD           [ shift and go to state 62 ]
+  ! M_SUB           [ shift and go to state 63 ]
+
+
+state 102
+
+    (17) expression -> expression M_SUB expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 17 (expression -> expression M_SUB expression .)
+    +               reduce using rule 17 (expression -> expression M_SUB expression .)
+    -               reduce using rule 17 (expression -> expression M_SUB expression .)
+    *               reduce using rule 17 (expression -> expression M_SUB expression .)
+    /               reduce using rule 17 (expression -> expression M_SUB expression .)
+    M_ADD           reduce using rule 17 (expression -> expression M_SUB expression .)
+    M_SUB           reduce using rule 17 (expression -> expression M_SUB expression .)
+    ,               reduce using rule 17 (expression -> expression M_SUB expression .)
+    ]               reduce using rule 17 (expression -> expression M_SUB expression .)
+    <               reduce using rule 17 (expression -> expression M_SUB expression .)
+    >               reduce using rule 17 (expression -> expression M_SUB expression .)
+    LE              reduce using rule 17 (expression -> expression M_SUB expression .)
+    GE              reduce using rule 17 (expression -> expression M_SUB expression .)
+    NEQ             reduce using rule 17 (expression -> expression M_SUB expression .)
+    EQ              reduce using rule 17 (expression -> expression M_SUB expression .)
+    )               reduce using rule 17 (expression -> expression M_SUB expression .)
+    :               reduce using rule 17 (expression -> expression M_SUB expression .)
+    {               reduce using rule 17 (expression -> expression M_SUB expression .)
+    ID              reduce using rule 17 (expression -> expression M_SUB expression .)
+    IF              reduce using rule 17 (expression -> expression M_SUB expression .)
+    WHILE           reduce using rule 17 (expression -> expression M_SUB expression .)
+    FOR             reduce using rule 17 (expression -> expression M_SUB expression .)
+    BREAK           reduce using rule 17 (expression -> expression M_SUB expression .)
+    CONTINUE        reduce using rule 17 (expression -> expression M_SUB expression .)
+    RETURN          reduce using rule 17 (expression -> expression M_SUB expression .)
+    PRINT           reduce using rule 17 (expression -> expression M_SUB expression .)
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_MUL           [ reduce using rule 17 (expression -> expression M_SUB expression .) ]
+  ! M_DIV           [ reduce using rule 17 (expression -> expression M_SUB expression .) ]
+  ! M_TRANSPOSE     [ reduce using rule 17 (expression -> expression M_SUB expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+  ! M_ADD           [ shift and go to state 62 ]
+  ! M_SUB           [ shift and go to state 63 ]
+
+
+state 103
+
+    (18) expression -> expression M_MUL expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 18 (expression -> expression M_MUL expression .)
+    +               reduce using rule 18 (expression -> expression M_MUL expression .)
+    -               reduce using rule 18 (expression -> expression M_MUL expression .)
+    *               reduce using rule 18 (expression -> expression M_MUL expression .)
+    /               reduce using rule 18 (expression -> expression M_MUL expression .)
+    M_ADD           reduce using rule 18 (expression -> expression M_MUL expression .)
+    M_SUB           reduce using rule 18 (expression -> expression M_MUL expression .)
+    M_MUL           reduce using rule 18 (expression -> expression M_MUL expression .)
+    M_DIV           reduce using rule 18 (expression -> expression M_MUL expression .)
+    ,               reduce using rule 18 (expression -> expression M_MUL expression .)
+    ]               reduce using rule 18 (expression -> expression M_MUL expression .)
+    <               reduce using rule 18 (expression -> expression M_MUL expression .)
+    >               reduce using rule 18 (expression -> expression M_MUL expression .)
+    LE              reduce using rule 18 (expression -> expression M_MUL expression .)
+    GE              reduce using rule 18 (expression -> expression M_MUL expression .)
+    NEQ             reduce using rule 18 (expression -> expression M_MUL expression .)
+    EQ              reduce using rule 18 (expression -> expression M_MUL expression .)
+    )               reduce using rule 18 (expression -> expression M_MUL expression .)
+    :               reduce using rule 18 (expression -> expression M_MUL expression .)
+    {               reduce using rule 18 (expression -> expression M_MUL expression .)
+    ID              reduce using rule 18 (expression -> expression M_MUL expression .)
+    IF              reduce using rule 18 (expression -> expression M_MUL expression .)
+    WHILE           reduce using rule 18 (expression -> expression M_MUL expression .)
+    FOR             reduce using rule 18 (expression -> expression M_MUL expression .)
+    BREAK           reduce using rule 18 (expression -> expression M_MUL expression .)
+    CONTINUE        reduce using rule 18 (expression -> expression M_MUL expression .)
+    RETURN          reduce using rule 18 (expression -> expression M_MUL expression .)
+    PRINT           reduce using rule 18 (expression -> expression M_MUL expression .)
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_TRANSPOSE     [ reduce using rule 18 (expression -> expression M_MUL expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+  ! M_ADD           [ shift and go to state 62 ]
+  ! M_SUB           [ shift and go to state 63 ]
+  ! M_MUL           [ shift and go to state 64 ]
+  ! M_DIV           [ shift and go to state 65 ]
+
+
+state 104
+
+    (19) expression -> expression M_DIV expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 19 (expression -> expression M_DIV expression .)
+    +               reduce using rule 19 (expression -> expression M_DIV expression .)
+    -               reduce using rule 19 (expression -> expression M_DIV expression .)
+    *               reduce using rule 19 (expression -> expression M_DIV expression .)
+    /               reduce using rule 19 (expression -> expression M_DIV expression .)
+    M_ADD           reduce using rule 19 (expression -> expression M_DIV expression .)
+    M_SUB           reduce using rule 19 (expression -> expression M_DIV expression .)
+    M_MUL           reduce using rule 19 (expression -> expression M_DIV expression .)
+    M_DIV           reduce using rule 19 (expression -> expression M_DIV expression .)
+    ,               reduce using rule 19 (expression -> expression M_DIV expression .)
+    ]               reduce using rule 19 (expression -> expression M_DIV expression .)
+    <               reduce using rule 19 (expression -> expression M_DIV expression .)
+    >               reduce using rule 19 (expression -> expression M_DIV expression .)
+    LE              reduce using rule 19 (expression -> expression M_DIV expression .)
+    GE              reduce using rule 19 (expression -> expression M_DIV expression .)
+    NEQ             reduce using rule 19 (expression -> expression M_DIV expression .)
+    EQ              reduce using rule 19 (expression -> expression M_DIV expression .)
+    )               reduce using rule 19 (expression -> expression M_DIV expression .)
+    :               reduce using rule 19 (expression -> expression M_DIV expression .)
+    {               reduce using rule 19 (expression -> expression M_DIV expression .)
+    ID              reduce using rule 19 (expression -> expression M_DIV expression .)
+    IF              reduce using rule 19 (expression -> expression M_DIV expression .)
+    WHILE           reduce using rule 19 (expression -> expression M_DIV expression .)
+    FOR             reduce using rule 19 (expression -> expression M_DIV expression .)
+    BREAK           reduce using rule 19 (expression -> expression M_DIV expression .)
+    CONTINUE        reduce using rule 19 (expression -> expression M_DIV expression .)
+    RETURN          reduce using rule 19 (expression -> expression M_DIV expression .)
+    PRINT           reduce using rule 19 (expression -> expression M_DIV expression .)
+    M_TRANSPOSE     shift and go to state 66
+
+  ! M_TRANSPOSE     [ reduce using rule 19 (expression -> expression M_DIV expression .) ]
+  ! +               [ shift and go to state 58 ]
+  ! -               [ shift and go to state 59 ]
+  ! *               [ shift and go to state 60 ]
+  ! /               [ shift and go to state 61 ]
+  ! M_ADD           [ shift and go to state 62 ]
+  ! M_SUB           [ shift and go to state 63 ]
+  ! M_MUL           [ shift and go to state 64 ]
+  ! M_DIV           [ shift and go to state 65 ]
+
+
+state 105
+
+    (10) expression -> ( expression ) .
+
+    ;               reduce using rule 10 (expression -> ( expression ) .)
+    +               reduce using rule 10 (expression -> ( expression ) .)
+    -               reduce using rule 10 (expression -> ( expression ) .)
+    *               reduce using rule 10 (expression -> ( expression ) .)
+    /               reduce using rule 10 (expression -> ( expression ) .)
+    M_ADD           reduce using rule 10 (expression -> ( expression ) .)
+    M_SUB           reduce using rule 10 (expression -> ( expression ) .)
+    M_MUL           reduce using rule 10 (expression -> ( expression ) .)
+    M_DIV           reduce using rule 10 (expression -> ( expression ) .)
+    M_TRANSPOSE     reduce using rule 10 (expression -> ( expression ) .)
+    ,               reduce using rule 10 (expression -> ( expression ) .)
+    ]               reduce using rule 10 (expression -> ( expression ) .)
+    <               reduce using rule 10 (expression -> ( expression ) .)
+    >               reduce using rule 10 (expression -> ( expression ) .)
+    LE              reduce using rule 10 (expression -> ( expression ) .)
+    GE              reduce using rule 10 (expression -> ( expression ) .)
+    NEQ             reduce using rule 10 (expression -> ( expression ) .)
+    EQ              reduce using rule 10 (expression -> ( expression ) .)
+    )               reduce using rule 10 (expression -> ( expression ) .)
+    :               reduce using rule 10 (expression -> ( expression ) .)
+    {               reduce using rule 10 (expression -> ( expression ) .)
+    ID              reduce using rule 10 (expression -> ( expression ) .)
+    IF              reduce using rule 10 (expression -> ( expression ) .)
+    WHILE           reduce using rule 10 (expression -> ( expression ) .)
+    FOR             reduce using rule 10 (expression -> ( expression ) .)
+    BREAK           reduce using rule 10 (expression -> ( expression ) .)
+    CONTINUE        reduce using rule 10 (expression -> ( expression ) .)
+    RETURN          reduce using rule 10 (expression -> ( expression ) .)
+    PRINT           reduce using rule 10 (expression -> ( expression ) .)
+
+
+state 106
+
+    (28) matrix -> ZEROS ( expression . )
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               shift and go to state 126
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 107
+
+    (29) matrix -> ONES ( expression . )
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               shift and go to state 127
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 108
+
+    (30) matrix -> EYE ( expression . )
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               shift and go to state 128
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 109
+
+    (49) matrix -> [ arraylist ] .
+
+    ;               reduce using rule 49 (matrix -> [ arraylist ] .)
+    +               reduce using rule 49 (matrix -> [ arraylist ] .)
+    -               reduce using rule 49 (matrix -> [ arraylist ] .)
+    *               reduce using rule 49 (matrix -> [ arraylist ] .)
+    /               reduce using rule 49 (matrix -> [ arraylist ] .)
+    M_ADD           reduce using rule 49 (matrix -> [ arraylist ] .)
+    M_SUB           reduce using rule 49 (matrix -> [ arraylist ] .)
+    M_MUL           reduce using rule 49 (matrix -> [ arraylist ] .)
+    M_DIV           reduce using rule 49 (matrix -> [ arraylist ] .)
+    M_TRANSPOSE     reduce using rule 49 (matrix -> [ arraylist ] .)
+    ,               reduce using rule 49 (matrix -> [ arraylist ] .)
+    ]               reduce using rule 49 (matrix -> [ arraylist ] .)
+    <               reduce using rule 49 (matrix -> [ arraylist ] .)
+    >               reduce using rule 49 (matrix -> [ arraylist ] .)
+    LE              reduce using rule 49 (matrix -> [ arraylist ] .)
+    GE              reduce using rule 49 (matrix -> [ arraylist ] .)
+    NEQ             reduce using rule 49 (matrix -> [ arraylist ] .)
+    EQ              reduce using rule 49 (matrix -> [ arraylist ] .)
+    )               reduce using rule 49 (matrix -> [ arraylist ] .)
+    :               reduce using rule 49 (matrix -> [ arraylist ] .)
+    {               reduce using rule 49 (matrix -> [ arraylist ] .)
+    ID              reduce using rule 49 (matrix -> [ arraylist ] .)
+    IF              reduce using rule 49 (matrix -> [ arraylist ] .)
+    WHILE           reduce using rule 49 (matrix -> [ arraylist ] .)
+    FOR             reduce using rule 49 (matrix -> [ arraylist ] .)
+    BREAK           reduce using rule 49 (matrix -> [ arraylist ] .)
+    CONTINUE        reduce using rule 49 (matrix -> [ arraylist ] .)
+    RETURN          reduce using rule 49 (matrix -> [ arraylist ] .)
+    PRINT           reduce using rule 49 (matrix -> [ arraylist ] .)
+
+
+state 110
+
+    (51) arraylist -> arraylist , . array
+    (52) array -> . [ list ]
+
+    [               shift and go to state 21
+
+    array                          shift and go to state 129
+
+state 111
+
+    (54) list -> list , expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    ;               reduce using rule 54 (list -> list , expression .)
+    ,               reduce using rule 54 (list -> list , expression .)
+    ]               reduce using rule 54 (list -> list , expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 112
+
+    (36) instruction -> ID array = expression ; .
+
+    ;               reduce using rule 36 (instruction -> ID array = expression ; .)
+    {               reduce using rule 36 (instruction -> ID array = expression ; .)
+    ID              reduce using rule 36 (instruction -> ID array = expression ; .)
+    IF              reduce using rule 36 (instruction -> ID array = expression ; .)
+    WHILE           reduce using rule 36 (instruction -> ID array = expression ; .)
+    FOR             reduce using rule 36 (instruction -> ID array = expression ; .)
+    BREAK           reduce using rule 36 (instruction -> ID array = expression ; .)
+    CONTINUE        reduce using rule 36 (instruction -> ID array = expression ; .)
+    RETURN          reduce using rule 36 (instruction -> ID array = expression ; .)
+    PRINT           reduce using rule 36 (instruction -> ID array = expression ; .)
+    $end            reduce using rule 36 (instruction -> ID array = expression ; .)
+    }               reduce using rule 36 (instruction -> ID array = expression ; .)
+    ELSE            reduce using rule 36 (instruction -> ID array = expression ; .)
+
+
+state 113
+
+    (37) instruction -> ID array A_ADD expression ; .
+
+    ;               reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    {               reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    ID              reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    IF              reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    WHILE           reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    FOR             reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    BREAK           reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    CONTINUE        reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    RETURN          reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    PRINT           reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    $end            reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    }               reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+    ELSE            reduce using rule 37 (instruction -> ID array A_ADD expression ; .)
+
+
+state 114
+
+    (38) instruction -> ID array A_SUB expression ; .
+
+    ;               reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    {               reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    ID              reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    IF              reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    WHILE           reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    FOR             reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    BREAK           reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    CONTINUE        reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    RETURN          reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    PRINT           reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    $end            reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    }               reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+    ELSE            reduce using rule 38 (instruction -> ID array A_SUB expression ; .)
+
+
+state 115
+
+    (39) instruction -> ID array A_MUL expression ; .
+
+    ;               reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    {               reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    ID              reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    IF              reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    WHILE           reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    FOR             reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    BREAK           reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    CONTINUE        reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    RETURN          reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    PRINT           reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    $end            reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    }               reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+    ELSE            reduce using rule 39 (instruction -> ID array A_MUL expression ; .)
+
+
+state 116
+
+    (40) instruction -> ID array A_DIV expression ; .
+
+    ;               reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    {               reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    ID              reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    IF              reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    WHILE           reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    FOR             reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    BREAK           reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    CONTINUE        reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    RETURN          reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    PRINT           reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    $end            reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    }               reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+    ELSE            reduce using rule 40 (instruction -> ID array A_DIV expression ; .)
+
+
+state 117
+
+    (41) instruction -> IF ( condition ) instruction .
+    (42) instruction -> IF ( condition ) instruction . ELSE instruction
+
+    ;               reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    {               reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    ID              reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    IF              reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    WHILE           reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    FOR             reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    BREAK           reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    CONTINUE        reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    RETURN          reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    PRINT           reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    $end            reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    }               reduce using rule 41 (instruction -> IF ( condition ) instruction .)
+    ELSE            shift and go to state 130
+
+  ! ELSE            [ reduce using rule 41 (instruction -> IF ( condition ) instruction .) ]
+
+
+state 118
+
+    (20) condition -> expression < expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               reduce using rule 20 (condition -> expression < expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 119
+
+    (21) condition -> expression > expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               reduce using rule 21 (condition -> expression > expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 120
+
+    (22) condition -> expression LE expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               reduce using rule 22 (condition -> expression LE expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 121
+
+    (23) condition -> expression GE expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               reduce using rule 23 (condition -> expression GE expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 122
+
+    (24) condition -> expression NEQ expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               reduce using rule 24 (condition -> expression NEQ expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 123
+
+    (25) condition -> expression EQ expression .
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+
+    )               reduce using rule 25 (condition -> expression EQ expression .)
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+
+
+state 124
+
+    (43) instruction -> WHILE ( condition ) instruction .
+
+    ;               reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    {               reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    ID              reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    IF              reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    WHILE           reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    FOR             reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    BREAK           reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    CONTINUE        reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    RETURN          reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    PRINT           reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    $end            reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    }               reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+    ELSE            reduce using rule 43 (instruction -> WHILE ( condition ) instruction .)
+
+
+state 125
+
+    (44) instruction -> FOR ID = expression : . expression instruction
+    (5) expression -> . INT
+    (6) expression -> . FLOAT
+    (7) expression -> . matrix
+    (8) expression -> . STRING
+    (9) expression -> . ID
+    (10) expression -> . ( expression )
+    (12) expression -> . expression + expression
+    (13) expression -> . expression - expression
+    (14) expression -> . expression * expression
+    (15) expression -> . expression / expression
+    (16) expression -> . expression M_ADD expression
+    (17) expression -> . expression M_SUB expression
+    (18) expression -> . expression M_MUL expression
+    (19) expression -> . expression M_DIV expression
+    (26) expression -> . - expression
+    (55) expression -> . ID array
+    (27) matrix -> . expression M_TRANSPOSE
+    (28) matrix -> . ZEROS ( expression )
+    (29) matrix -> . ONES ( expression )
+    (30) matrix -> . EYE ( expression )
+    (49) matrix -> . [ arraylist ]
+
+    INT             shift and go to state 28
+    FLOAT           shift and go to state 29
+    STRING          shift and go to state 31
+    ID              shift and go to state 32
+    (               shift and go to state 33
+    -               shift and go to state 34
+    ZEROS           shift and go to state 35
+    ONES            shift and go to state 36
+    EYE             shift and go to state 37
+    [               shift and go to state 38
+
+    expression                     shift and go to state 131
+    matrix                         shift and go to state 30
+
+state 126
+
+    (28) matrix -> ZEROS ( expression ) .
+
+    ;               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    +               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    -               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    *               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    /               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    M_ADD           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    M_SUB           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    M_MUL           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    M_DIV           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    M_TRANSPOSE     reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    ,               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    ]               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    <               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    >               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    LE              reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    GE              reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    NEQ             reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    EQ              reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    )               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    :               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    {               reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    ID              reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    IF              reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    WHILE           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    FOR             reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    BREAK           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    CONTINUE        reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    RETURN          reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+    PRINT           reduce using rule 28 (matrix -> ZEROS ( expression ) .)
+
+
+state 127
+
+    (29) matrix -> ONES ( expression ) .
+
+    ;               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    +               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    -               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    *               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    /               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    M_ADD           reduce using rule 29 (matrix -> ONES ( expression ) .)
+    M_SUB           reduce using rule 29 (matrix -> ONES ( expression ) .)
+    M_MUL           reduce using rule 29 (matrix -> ONES ( expression ) .)
+    M_DIV           reduce using rule 29 (matrix -> ONES ( expression ) .)
+    M_TRANSPOSE     reduce using rule 29 (matrix -> ONES ( expression ) .)
+    ,               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    ]               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    <               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    >               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    LE              reduce using rule 29 (matrix -> ONES ( expression ) .)
+    GE              reduce using rule 29 (matrix -> ONES ( expression ) .)
+    NEQ             reduce using rule 29 (matrix -> ONES ( expression ) .)
+    EQ              reduce using rule 29 (matrix -> ONES ( expression ) .)
+    )               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    :               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    {               reduce using rule 29 (matrix -> ONES ( expression ) .)
+    ID              reduce using rule 29 (matrix -> ONES ( expression ) .)
+    IF              reduce using rule 29 (matrix -> ONES ( expression ) .)
+    WHILE           reduce using rule 29 (matrix -> ONES ( expression ) .)
+    FOR             reduce using rule 29 (matrix -> ONES ( expression ) .)
+    BREAK           reduce using rule 29 (matrix -> ONES ( expression ) .)
+    CONTINUE        reduce using rule 29 (matrix -> ONES ( expression ) .)
+    RETURN          reduce using rule 29 (matrix -> ONES ( expression ) .)
+    PRINT           reduce using rule 29 (matrix -> ONES ( expression ) .)
+
+
+state 128
+
+    (30) matrix -> EYE ( expression ) .
+
+    ;               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    +               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    -               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    *               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    /               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    M_ADD           reduce using rule 30 (matrix -> EYE ( expression ) .)
+    M_SUB           reduce using rule 30 (matrix -> EYE ( expression ) .)
+    M_MUL           reduce using rule 30 (matrix -> EYE ( expression ) .)
+    M_DIV           reduce using rule 30 (matrix -> EYE ( expression ) .)
+    M_TRANSPOSE     reduce using rule 30 (matrix -> EYE ( expression ) .)
+    ,               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    ]               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    <               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    >               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    LE              reduce using rule 30 (matrix -> EYE ( expression ) .)
+    GE              reduce using rule 30 (matrix -> EYE ( expression ) .)
+    NEQ             reduce using rule 30 (matrix -> EYE ( expression ) .)
+    EQ              reduce using rule 30 (matrix -> EYE ( expression ) .)
+    )               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    :               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    {               reduce using rule 30 (matrix -> EYE ( expression ) .)
+    ID              reduce using rule 30 (matrix -> EYE ( expression ) .)
+    IF              reduce using rule 30 (matrix -> EYE ( expression ) .)
+    WHILE           reduce using rule 30 (matrix -> EYE ( expression ) .)
+    FOR             reduce using rule 30 (matrix -> EYE ( expression ) .)
+    BREAK           reduce using rule 30 (matrix -> EYE ( expression ) .)
+    CONTINUE        reduce using rule 30 (matrix -> EYE ( expression ) .)
+    RETURN          reduce using rule 30 (matrix -> EYE ( expression ) .)
+    PRINT           reduce using rule 30 (matrix -> EYE ( expression ) .)
+
+
+state 129
+
+    (51) arraylist -> arraylist , array .
+
+    ]               reduce using rule 51 (arraylist -> arraylist , array .)
+    ,               reduce using rule 51 (arraylist -> arraylist , array .)
+
+
+state 130
+
+    (42) instruction -> IF ( condition ) instruction ELSE . instruction
+    (4) instruction -> . ;
+    (11) instruction -> . { instructions }
+    (31) instruction -> . ID = expression ;
+    (32) instruction -> . ID A_ADD expression ;
+    (33) instruction -> . ID A_SUB expression ;
+    (34) instruction -> . ID A_MUL expression ;
+    (35) instruction -> . ID A_DIV expression ;
+    (36) instruction -> . ID array = expression ;
+    (37) instruction -> . ID array A_ADD expression ;
+    (38) instruction -> . ID array A_SUB expression ;
+    (39) instruction -> . ID array A_MUL expression ;
+    (40) instruction -> . ID array A_DIV expression ;
+    (41) instruction -> . IF ( condition ) instruction
+    (42) instruction -> . IF ( condition ) instruction ELSE instruction
+    (43) instruction -> . WHILE ( condition ) instruction
+    (44) instruction -> . FOR ID = expression : expression instruction
+    (45) instruction -> . BREAK ;
+    (46) instruction -> . CONTINUE ;
+    (47) instruction -> . RETURN expression ;
+    (48) instruction -> . PRINT list ;
+
+    ;               shift and go to state 4
+    {               shift and go to state 5
+    ID              shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    BREAK           shift and go to state 10
+    CONTINUE        shift and go to state 11
+    RETURN          shift and go to state 12
+    PRINT           shift and go to state 13
+
+    instruction                    shift and go to state 132
+
+state 131
+
+    (44) instruction -> FOR ID = expression : expression . instruction
+    (12) expression -> expression . + expression
+    (13) expression -> expression . - expression
+    (14) expression -> expression . * expression
+    (15) expression -> expression . / expression
+    (16) expression -> expression . M_ADD expression
+    (17) expression -> expression . M_SUB expression
+    (18) expression -> expression . M_MUL expression
+    (19) expression -> expression . M_DIV expression
+    (27) matrix -> expression . M_TRANSPOSE
+    (4) instruction -> . ;
+    (11) instruction -> . { instructions }
+    (31) instruction -> . ID = expression ;
+    (32) instruction -> . ID A_ADD expression ;
+    (33) instruction -> . ID A_SUB expression ;
+    (34) instruction -> . ID A_MUL expression ;
+    (35) instruction -> . ID A_DIV expression ;
+    (36) instruction -> . ID array = expression ;
+    (37) instruction -> . ID array A_ADD expression ;
+    (38) instruction -> . ID array A_SUB expression ;
+    (39) instruction -> . ID array A_MUL expression ;
+    (40) instruction -> . ID array A_DIV expression ;
+    (41) instruction -> . IF ( condition ) instruction
+    (42) instruction -> . IF ( condition ) instruction ELSE instruction
+    (43) instruction -> . WHILE ( condition ) instruction
+    (44) instruction -> . FOR ID = expression : expression instruction
+    (45) instruction -> . BREAK ;
+    (46) instruction -> . CONTINUE ;
+    (47) instruction -> . RETURN expression ;
+    (48) instruction -> . PRINT list ;
+
+    +               shift and go to state 58
+    -               shift and go to state 59
+    *               shift and go to state 60
+    /               shift and go to state 61
+    M_ADD           shift and go to state 62
+    M_SUB           shift and go to state 63
+    M_MUL           shift and go to state 64
+    M_DIV           shift and go to state 65
+    M_TRANSPOSE     shift and go to state 66
+    ;               shift and go to state 4
+    {               shift and go to state 5
+    ID              shift and go to state 6
+    IF              shift and go to state 7
+    WHILE           shift and go to state 8
+    FOR             shift and go to state 9
+    BREAK           shift and go to state 10
+    CONTINUE        shift and go to state 11
+    RETURN          shift and go to state 12
+    PRINT           shift and go to state 13
+
+    instruction                    shift and go to state 133
+
+state 132
+
+    (42) instruction -> IF ( condition ) instruction ELSE instruction .
+
+    ;               reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    {               reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    ID              reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    IF              reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    WHILE           reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    FOR             reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    BREAK           reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    CONTINUE        reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    RETURN          reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    PRINT           reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    $end            reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    }               reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+    ELSE            reduce using rule 42 (instruction -> IF ( condition ) instruction ELSE instruction .)
+
+
+state 133
+
+    (44) instruction -> FOR ID = expression : expression instruction .
+
+    ;               reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    {               reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    ID              reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    IF              reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    WHILE           reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    FOR             reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    BREAK           reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    CONTINUE        reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    RETURN          reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    PRINT           reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    $end            reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    }               reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+    ELSE            reduce using rule 44 (instruction -> FOR ID = expression : expression instruction .)
+

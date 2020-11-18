@@ -8,9 +8,9 @@ tokens = scanner.tokens
 precedence = (
     ('left', '='),
     ('nonassoc', '<', '>', 'LE', 'GE'),
-    ("left", '+', '+'),
+    ("left", '+', '-'),
     ("left", "*", "/"),
-    ("left", 'M_ADD', 'M_DIV'),
+    ("left", 'M_ADD', 'M_SUB'),
     ("left", "M_MUL", "M_DIV"),
     ('right', 'UMINUS'),
     ("left", "M_TRANSPOSE"),
